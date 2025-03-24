@@ -101,7 +101,7 @@ y = 2 * x + np.random.randn(100)
 from sklearn.linear_model import LinearRegression
 
 # 2 - Устанавливаем гиперпараметры модели
-model = LinearRegression() # линейная регрессия(аргументы: fit_intercept=True(Это параметр отвечает за наличие смещения)
+model = LinearRegression()  # линейная регрессия(аргументы: fit_intercept=True(Это параметр отвечает за наличие смещения)
 # 3 - Создаем матрицу признаков и целевой массив
 model.fit(x[:, np.newaxis], y)
 # 4 - Обучение модели на наших данных
@@ -110,7 +110,6 @@ y_pred = model.predict(x[:, np.newaxis])
 plt.scatter(x, y)
 plt.plot(x, y_pred, color='red')
 plt.show()
-
 
 # Коэффициенты модели которые она нашла при обучении на наших данных
 print(model.coef_[0])
