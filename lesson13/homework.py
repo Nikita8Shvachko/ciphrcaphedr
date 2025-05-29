@@ -20,8 +20,6 @@ axes = axes.ravel()
 
 
 def get_reduced_dataset(X, y, test_size, support_vectors, random_state=42):
-    """Get reduced dataset while preserving support vectors."""
-    # Convert support vectors to DataFrame for easier comparison
     sv_df = pd.DataFrame(support_vectors, columns=["sepal_length", "petal_length"])
 
     # Выбираем опорные вектора
@@ -53,7 +51,6 @@ def plot_svm(X, y, ax, title):
     model = SVC(kernel="linear", C=100000)
     model.fit(X, y)
 
-    # Plot original data points
     data_df_setosa = pd.DataFrame(
         X[y == "setosa"], columns=["sepal_length", "petal_length"]
     )
@@ -74,7 +71,6 @@ def plot_svm(X, y, ax, title):
         alpha=0.6,
     )
 
-    # Plot support vectors
     ax.scatter(
         model.support_vectors_[:, 0],
         model.support_vectors_[:, 1],
@@ -84,7 +80,6 @@ def plot_svm(X, y, ax, title):
         label="Support Vectors",
     )
 
-    # Plot decision boundary
     x1_p = np.linspace(min(X["sepal_length"]), max(X["sepal_length"]), 100)
     x2_p = np.linspace(min(X["petal_length"]), max(X["petal_length"]), 100)
     X1_p, X2_p = np.meshgrid(x1_p, x2_p)
@@ -117,11 +112,10 @@ def plot_svm(X, y, ax, title):
     return model
 
 
-# Get original model and its support vectors
 model1 = plot_svm(X, y, axes[0], "Original Data")
 original_support_vectors = model1.support_vectors_
 
-# Create reduced datasets while preserving support vectors
+
 X_train_75, y_train_75 = get_reduced_dataset(X, y, 0.25, original_support_vectors)
 model2 = plot_svm(X_train_75, y_train_75, axes[1], "75%")
 
